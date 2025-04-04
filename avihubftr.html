@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NextGen Aviation Hub | The Ultimate Aviation Community</title>
+        
+        <style>
+            /* ADD THIS BELOW YOUR EXISTING STYLES */
+            @media (max-width: 768px) {
+              header.py-20 { padding: 4rem 1rem; }
+              nav .container { padding: 0 1rem; }
+              .community-post { padding: 1rem; }
+              #flightSearch { font-size: 14px; }
+            }
+          </style>
+
+    
+        
+        
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        
+        <!-- Tailwind Configuration -->
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontSize: {  // ADD THIS INSIDE extend: {}
+          'base': ['16px', { lineHeight: '1.5' }],
+          'lg': ['18px', { lineHeight: '1.5' }],
+        },
+                        colors: {
+                            aviation: {
+                                blue: '#1E3A8A',
+                                light: '#93C5FD',
+                                dark: '#172554',
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+        
+        <!-- Custom Styles -->
+        <style>
+            .news-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .flight-tracker {
+                background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            }
+            .community-post {
+                transition: all 0.3s ease;
+            }
+            .community-post:hover {
+                background-color: #F3F4F6;
+            }
+            #map {
+                height: 400px;
+                width: 100%;
+                border-radius: 0.5rem;
+            }
+        </style>
+    </head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-aviation-blue text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="flex items-center space-x-2">
+                        <i class="fas fa-plane-departure text-2xl"></i>
+                        <span class="text-xl font-bold">NextGen Aviation Hub</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#news" class="hover:text-aviation-light transition">News</a>
+                    <a href="#tracker" class="hover:text-aviation-light transition">Flight Tracker</a>
+                    <a href="#resources" class="hover:text-aviation-light transition">Pilot Resources</a>
+                    <a href="#community" class="hover:text-aviation-light transition">Community</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="loginBtn" class="bg-white text-aviation-blue px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition">Sign In</button>
+                    <button id="registerBtn" class="border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-aviation-blue transition">Register</button>
+                    <div id="userMenu" class="hidden relative">
+                        <button id="userBtn" class="flex items-center space-x-2">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=3B82F6&color=fff" alt="User" class="w-8 h-8 rounded-full">
+                            <span>John Doe</span>
+                        </button>
+                        <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
+                            <a href="#" id="logoutBtn" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <button id="mobileMenuBtn" class="md:hidden text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-2">
+                <a href="#news" class="block py-2 hover:bg-aviation-dark px-2 rounded">News</a>
+                <a href="#tracker" class="block py-2 hover:bg-aviation-dark px-2 rounded">Flight Tracker</a>
+                <a href="#resources" class="block py-2 hover:bg-aviation-dark px-2 rounded">Pilot Resources</a>
+                <a href="#community" class="block py-2 hover:bg-aviation-dark px-2 rounded">Community</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-aviation-blue to-aviation-dark text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Welcome to the Future of Aviation</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Your one-stop hub for aviation news, flight tracking, pilot resources, and community engagement.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#tracker" class="bg-white text-aviation-blue px-8 py-3 rounded-md font-bold hover:bg-gray-100 transition">Track Flights</a>
+                <a href="#community" class="border border-white px-8 py-3 rounded-md font-bold hover:bg-white hover:text-aviation-blue transition">Join Community</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- News Section -->
+    <section id="news" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-3xl font-bold text-aviation-dark">Latest Aviation News</h2>
+                <div class="text-sm text-gray-500">Updated: <span id="newsUpdateTime"></span></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News Card 1 -->
+                <div class="news-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1556388158-158ea5ccacbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Airbus A350" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Breaking</span>
+                            <span class="text-gray-500 text-sm ml-2">Source: FlightGlobal</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Airbus Unveils New A350 Variant with 20% Fuel Efficiency</h3>
+                        <p class="text-gray-600 mb-4">Airbus has announced a new variant of its A350 aircraft that promises significant fuel savings and reduced emissions...</p>
+                        <a href="https://www.flightglobal.com" target="_blank" class="text-aviation-blue font-medium hover:underline">Read more</a>
+                    </div>
+                </div>
+                
+                <!-- News Card 2 -->
+                <div class="news-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1474&q=80" alt="Boeing 787" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Technology</span>
+                            <span class="text-gray-500 text-sm ml-2">Source: AIN Online</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Boeing Completes First Test Flight of Autonomous 787</h3>
+                        <p class="text-gray-600 mb-4">Boeing has successfully completed the first test flight of its autonomous flight technology on a 787 Dreamliner...</p>
+                        <a href="https://www.ainonline.com" target="_blank" class="text-aviation-blue font-medium hover:underline">Read more</a>
+                    </div>
+                </div>
+                
+                <!-- News Card 3 -->
+                <div class="news-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1529074963764-98f45c47344b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Airport" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Regulation</span>
+                            <span class="text-gray-500 text-sm ml-2">Source: Aviation Week</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">FAA Announces New Drone Regulations for Urban Areas</h3>
+                        <p class="text-gray-600 mb-4">The Federal Aviation Administration has released new regulations governing drone operations in urban environments...</p>
+                        <a href="https://aviationweek.com" target="_blank" class="text-aviation-blue font-medium hover:underline">Read more</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center">
+                <a href="#" id="loadMoreNews" class="inline-flex items-center px-6 py-3 border border-aviation-blue text-aviation-blue rounded-md hover:bg-aviation-blue hover:text-white transition">
+                    <i class="fas fa-sync-alt mr-2"></i> Load More News
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flight Tracker Section -->
+    <section id="tracker" class="py-16 flight-tracker text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-10 text-center">Real-Time Flight Tracker</h2>
+            
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+                <div class="p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <div class="w-full md:w-1/2 mb-4 md:mb-0">
+                            <label for="flightSearch" class="block text-gray-700 font-medium mb-2">Search by Flight Number or Route</label>
+                            <div class="relative">
+                                <input type="text" id="flightSearch" placeholder="e.g. BA123 or LHR-JFK" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-aviation-blue text-gray-800">
+                                <button id="searchFlightBtn" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-aviation-blue text-white px-4 py-2 rounded-md hover:bg-aviation-dark transition">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="text-center md:text-right">
+                            <p class="text-gray-700 mb-2">Powered by Flightradar24</p>
+                            <a href="https://www.flightradar24.com" target="_blank" class="inline-flex items-center text-aviation-blue hover:underline">
+                                <span>View Full Map</span>
+                                <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div id="map"></div>
+                    
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Popular Flight 1 -->
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-gray-800">BA112</span>
+                                <span class="text-sm text-gray-600">LHR ➔ JFK</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span>Status: <span class="font-medium text-green-600">On Time</span></span>
+                                <a href="#" class="text-aviation-blue hover:underline">Track</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Popular Flight 2 -->
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-gray-800">AF382</span>
+                                <span class="text-sm text-gray-600">CDG ➔ LAX</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span>Status: <span class="font-medium text-yellow-600">Delayed</span></span>
+                                <a href="#" class="text-aviation-blue hover:underline">Track</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Popular Flight 3 -->
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-gray-800">EK412</span>
+                                <span class="text-sm text-gray-600">DXB ➔ SYD</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span>Status: <span class="font-medium text-green-600">On Time</span></span>
+                                <a href="#" class="text-aviation-blue hover:underline">Track</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pilot Resources Section -->
+    <section id="resources" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-10 text-center text-aviation-dark">Pilot Resources</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Resource 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="bg-aviation-blue p-4 text-white">
+                        <i class="fas fa-map-marked-alt text-3xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Navigation Charts</h3>
+                        <p class="text-gray-600 mb-4">Access to worldwide navigation charts and airport diagrams.</p>
+                        <a href="https://skyvector.com" target="_blank" class="text-aviation-blue font-medium hover:underline">Access Charts</a>
+                    </div>
+                </div>
+                
+                <!-- Resource 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="bg-aviation-blue p-4 text-white">
+                        <i class="fas fa-cloud-sun-rain text-3xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Weather Reports</h3>
+                        <p class="text-gray-600 mb-4">Real-time METARs, TAFs, and aviation weather forecasts.</p>
+                        <a href="https://www.aviationweather.gov" target="_blank" class="text-aviation-blue font-medium hover:underline">Check Weather</a>
+                    </div>
+                </div>
+                
+                <!-- Resource 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="bg-aviation-blue p-4 text-white">
+                        <i class="fas fa-book text-3xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Regulations</h3>
+                        <p class="text-gray-600 mb-4">FAA, EASA, and ICAO regulations and documentation.</p>
+                        <a href="https://www.faa.gov/regulations_policies" target="_blank" class="text-aviation-blue font-medium hover:underline">View Regulations</a>
+                    </div>
+                </div>
+                
+                <!-- Resource 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="bg-aviation-blue p-4 text-white">
+                        <i class="fas fa-graduation-cap text-3xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Training Courses</h3>
+                        <p class="text-gray-600 mb-4">Online courses for pilots at all experience levels.</p>
+                        <a href="https://www.sportys.com" target="_blank" class="text-aviation-blue font-medium hover:underline">Explore Courses</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-aviation-dark">Flight Planning Tools</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition">
+                            <h4 class="font-bold mb-2">Fuel Calculator</h4>
+                            <p class="text-gray-600 mb-3">Calculate fuel requirements for your flight.</p>
+                            <button class="text-aviation-blue font-medium hover:underline">Open Calculator</button>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition">
+                            <h4 class="font-bold mb-2">Weight & Balance</h4>
+                            <p class="text-gray-600 mb-3">Ensure your aircraft is properly loaded.</p>
+                            <button class="text-aviation-blue font-medium hover:underline">Open Tool</button>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition">
+                            <h4 class="font-bold mb-2">Flight Log</h4>
+                            <p class="text-gray-600 mb-3">Track your flight hours and experience.</p>
+                            <button class="text-aviation-blue font-medium hover:underline">Open Logbook</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-10 text-center text-aviation-dark">Aviation Community</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <!-- Community Posts -->
+                    <div class="bg-gray-50 rounded-lg shadow-sm p-6 mb-6">
+                        <h3 class="text-xl font-bold mb-4">Recent Discussions</h3>
+                        
+                        <div id="communityPosts">
+                            <!-- Post 1 -->
+                            <div class="community-post bg-white rounded-lg p-4 mb-4 shadow-sm">
+                                <div class="flex items-start mb-3">
+                                    <img src="https://ui-avatars.com/api/?name=Captain+Mike&background=3B82F6&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <div class="flex items-center">
+                                            <h4 class="font-bold">Captain Mike</h4>
+                                            <span class="text-gray-500 text-sm ml-2">2 hours ago</span>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">ATP, 12,000 hours</p>
+                                    </div>
+                                </div>
+                                <h5 class="font-bold mb-2">Best approach for crosswind landings?</h5>
+                                <p class="text-gray-700 mb-3">I've been flying the 737 for about 5 years now and wanted to share my technique for handling strong crosswinds. I prefer the crab and kick method right at the end...</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <button class="flex items-center mr-4 hover:text-aviation-blue">
+                                        <i class="far fa-comment mr-1"></i> 14 comments
+                                    </button>
+                                    <button class="flex items-center hover:text-aviation-blue">
+                                        <i class="far fa-heart mr-1"></i> 32 likes
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Post 2 -->
+                            <div class="community-post bg-white rounded-lg p-4 mb-4 shadow-sm">
+                                <div class="flex items-start mb-3">
+                                    <img src="https://ui-avatars.com/api/?name=Sarah+Pilot&background=3B82F6&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <div class="flex items-center">
+                                            <h4 class="font-bold">Sarah Pilot</h4>
+                                            <span class="text-gray-500 text-sm ml-2">5 hours ago</span>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">Private Pilot, 350 hours</p>
+                                    </div>
+                                </div>
+                                <h5 class="font-bold mb-2">First solo cross-country tomorrow!</h5>
+                                <p class="text-gray-700 mb-3">After months of training, I'm finally doing my first solo cross-country tomorrow from KPAO to KCMA. Any last-minute advice from more experienced pilots? I've planned everything but still nervous...</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <button class="flex items-center mr-4 hover:text-aviation-blue">
+                                        <i class="far fa-comment mr-1"></i> 8 comments
+                                    </button>
+                                    <button class="flex items-center hover:text-aviation-blue">
+                                        <i class="far fa-heart mr-1"></i> 24 likes
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Post 3 -->
+                            <div class="community-post bg-white rounded-lg p-4 mb-4 shadow-sm">
+                                <div class="flex items-start mb-3">
+                                    <img src="https://ui-avatars.com/api/?name=Jet+Engineer&background=3B82F6&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <div class="flex items-center">
+                                            <h4 class="font-bold">Jet Engineer</h4>
+                                            <span class="text-gray-500 text-sm ml-2">1 day ago</span>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">A&P Mechanic, 15 years experience</p>
+                                    </div>
+                                </div>
+                                <h5 class="font-bold mb-2">Common issues with G1000 systems</h5>
+                                <p class="text-gray-700 mb-3">I've been working on G1000-equipped aircraft for years and wanted to share some common issues pilots should be aware of. The most frequent problem I see is...</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <button class="flex items-center mr-4 hover:text-aviation-blue">
+                                        <i class="far fa-comment mr-1"></i> 11 comments
+                                    </button>
+                                    <button class="flex items-center hover:text-aviation-blue">
+                                        <i class="far fa-heart mr-1"></i> 18 likes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-6">
+                            <button id="loadMorePosts" class="px-6 py-2 border border-aviation-blue text-aviation-blue rounded-md hover:bg-aviation-blue hover:text-white transition">
+                                Load More Posts
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Create Post (visible when logged in) -->
+                    <div id="createPostForm" class="bg-white rounded-lg shadow-md p-6 mb-8 hidden">
+                        <h3 class="text-xl font-bold mb-4">Create New Post</h3>
+                        <form id="postForm">
+                            <div class="mb-4">
+                                <label for="postTitle" class="block text-gray-700 font-medium mb-2">Title</label>
+                                <input type="text" id="postTitle" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-aviation-blue" placeholder="What's your question or topic?">
+                            </div>
+                            <div class="mb-4">
+                                <label for="postContent" class="block text-gray-700 font-medium mb-2">Content</label>
+                                <textarea id="postContent" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-aviation-blue" placeholder="Share your thoughts with the aviation community..."></textarea>
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="button" id="cancelPostBtn" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md mr-2 hover:bg-gray-100">Cancel</button>
+                                <button type="submit" class="px-6 py-2 bg-aviation-blue text-white rounded-md hover:bg-aviation-dark">Post</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Login Prompt (visible when not logged in) -->
+                    <div id="loginPrompt" class="bg-white rounded-lg shadow-md p-6 mb-8">
+                        <h3 class="text-xl font-bold mb-2">Join the Discussion</h3>
+                        <p class="text-gray-600 mb-4">Sign in to participate in the aviation community, ask questions, and share your experiences.</p>
+                        <button id="loginPromptBtn" class="px-6 py-2 bg-aviation-blue text-white rounded-md hover:bg-aviation-dark">Sign In</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <!-- Community Stats -->
+                    <div class="bg-gray-50 rounded-lg shadow-sm p-6 mb-6">
+                        <h3 class="text-xl font-bold mb-4">Community Stats</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-3xl font-bold text-aviation-blue">12,847</p>
+                                <p class="text-gray-600">Members</p>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold text-aviation-blue">4,321</p>
+                                <p class="text-gray-600">Active Pilots</p>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold text-aviation-blue">28,956</p>
+                                <p class="text-gray-600">Total Posts</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Top Contributors -->
+                    <div class="bg-gray-50 rounded-lg shadow-sm p-6 mb-6">
+                        <h3 class="text-xl font-bold mb-4">Top Contributors</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <img src="https://ui-avatars.com/api/?name=Captain+Mike&background=3B82F6&color=fff" alt="User" class="w-8 h-8 rounded-full mr-2">
+                                <div>
+                                    <p class="font-medium">Captain Mike</p>
+                                    <p class="text-xs text-gray-500">1,248 posts</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="https://ui-avatars.com/api/?name=Wing+Commander&background=3B82F6&color=fff" alt="User" class="w-8 h-8 rounded-full mr-2">
+                                <div>
+                                    <p class="font-medium">Wing Commander</p>
+                                    <p class="text-xs text-gray-500">987 posts</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="https://ui-avatars.com/api/?name=Air+Traffic+Control&background=3B82F6&color=fff" alt="User" class="w-8 h-8 rounded-full mr-2">
+                                <div>
+                                    <p class="font-medium">Air Traffic Control</p>
+                                    <p class="text-xs text-gray-500">756 posts</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Start New Topic -->
+                    <div id="newTopicBtnContainer" class="hidden">
+                        <button id="newTopicBtn" class="w-full py-3 bg-aviation-blue text-white rounded-md hover:bg-aviation-dark flex items-center justify-center">
+                            <i class="fas fa-plus mr-2"></i> New Topic
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-12 bg-aviation-dark text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Stay Updated with Aviation News</h2>
+            <p class="max-w-2xl mx-auto mb-6">Subscribe to our newsletter for the latest aviation news, events, and community highlights.</p>
+            <form class="max-w-md mx-auto flex">
+                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-l-md focus:outline-none text-gray-800">
+                <button type="submit" class="px-6 py-3 bg-aviation-blue rounded-r-md hover:bg-blue-700 transition">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-plane-departure mr-2"></i> NextGen Aviation Hub
+                    </h3>
+                    <p class="text-gray-400">The ultimate destination for aviation enthusiasts, professionals, and pilots.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#news" class="text-gray-400 hover:text-white transition">News</a></li>
+                        <li><a href="#tracker" class="text-gray-400 hover:text-white transition">Flight Tracker</a></li>
+                        <li><a href="#resources" class="text-gray-400 hover:text-white transition">Pilot Resources</a></li>
+                        <li><a href="#community" class="text-gray-400 hover:text-white transition">Community</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect With Us</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-aviation-blue transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-aviation-blue transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-aviation-blue transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-aviation-blue transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400">Email: info@nextgenaviationhub.com</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 NextGen Aviation Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-gray-800">Sign In</h3>
+                    <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="loginForm">
+                    <div class="mb-4">
+                        <label for="loginEmail" class="block text-gray-700 font-medium mb-2">Email</label>
+                        <input type="email" id="loginEmail" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-aviation-blue" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="loginPassword" class="block text-gray-700 font-medium mb-2">Password</label>
+                        <input type="password" id="loginPassword" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-aviation-blue" required>
+                    </div>
+                    <button type="submit" class="w-full py-2 bg-aviation-blue text-white rounded-md hover:bg-aviation-dark mb-4">Sign In</button>
+                    <div class="text-center">
+                        <a href="#" class="text-aviation-blue hover:underline text-sm">Forgot password?</a>
+                    </div>
+                </form>
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <p class="text-gray-600 text-center">Don't have an account? <button id="switchToRegister" class="text-aviation-blue hover:underline">Register</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-gray-800">Create Account</h3>
+                    <button id="closeRegisterModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="registerForm">
+                    <div class="mb-4">
+                        <label for="registerName" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                        <input type="text" id="registerName" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-aviation-blue" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="registerEmail" class="block text-gray-700 font-medium mb-2">Email</label>
+                        <input type="email" id="registerEmail" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-aviation-blue" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="registerPassword" class="block text-gray-700 font-medium mb-2">Password</label>
+                        <input type="password" id="registerPassword" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-aviation-blue" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="registerConfirmPassword" class="block text-gray-700 font-medium mb-2">Confirm Password</label>
+                        <input type="password" id="registerConfirmPassword" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-aviation-blue" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="form-checkbox rounded text-aviation-blue" required>
+                            <span class="ml-2 text-gray-700 text-sm">I agree to the <a href="#" class="text-aviation-blue hover:underline">Terms of Service</a> and <a href="#" class="text-aviation-blue hover:underline">Privacy Policy</a></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="w-full py-2 bg-aviation-blue text-white rounded-md hover:bg-aviation-dark mb-4">Create Account</button>
+                </form>
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <p class="text-gray-600 text-center">Already have an account? <button id="switchToLogin" class="text-aviation-blue hover:underline">Sign In</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flight Tracker Modal -->
+    <div id="flightModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-gray-800">Flight Details: <span id="flightNumber">BA112</span></h3>
+                    <button id="closeFlightModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">Route</h4>
+                        <p class="text-xl"><span id="departureAirport">LHR</span> ➔ <span id="arrivalAirport">JFK</span></p>
+                        <p class="text-gray-600 text-sm">London Heathrow to New York JFK</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">Status</h4>
+                        <p class="text-xl text-green-600" id="flightStatus">On Time</p>
+                        <p class="text-gray-600 text-sm">Scheduled departure: <span id="departureTime">10:45</span></p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">Aircraft</h4>
+                        <p class="text-xl" id="aircraftType">Boeing 777-300ER</p>
+                        <p class="text-gray-600 text-sm">Registration: <span id="aircraftReg">G-STBA</span></p>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <div id="flightMap" style="height: 300px; width: 100%; border-radius: 0.5rem;"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-bold mb-2">Flight Progress</h4>
+                        <div class="bg-gray-200 rounded-full h-4 mb-2">
+                            <div class="bg-aviation-blue h-4 rounded-full" style="width: 65%"></div>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-600">
+                            <span>Departed: 10:45</span>
+                            <span>ETA: 13:25</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-2">More Details</h4>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600">Altitude:</span>
+                            <span>35,000 ft</span>
+                        </div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600">Speed:</span>
+                            <span>520 kts</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Distance remaining:</span>
+                            <span>1,245 mi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 text-center">
+                    <a href="https://www.flightradar24.com" target="_blank" class="inline-flex items-center px-4 py-2 bg-aviation-blue text-white rounded-md hover:bg-aviation-dark">
+                        <i class="fas fa-external-link-alt mr-2"></i> View on Flightradar24
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Notification -->
+    <div id="successNotification" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg flex items-center hidden z-50">
+        <i class="fas fa-check-circle mr-2"></i>
+        <span id="successMessage">Operation completed successfully!</span>
+    </div>
+
+
+
+
+    
+    
+ 
+
+
+    <script>
+       
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const userMenu = document.getElementById('userMenu');
+        const userBtn = document.getElementById('userBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const closeLoginModal = document.getElementById('closeLoginModal');
+        const closeRegisterModal = document.getElementById('closeRegisterModal');
+        const switchToRegister = document.getElementById('switchToRegister');
+        const switchToLogin = document.getElementById('switchToLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const createPostForm = document.getElementById('createPostForm');
+        const loginPrompt = document.getElementById('loginPrompt');
+        const loginPromptBtn = document.getElementById('loginPromptBtn');
+        const postForm = document.getElementById('postForm');
+        const cancelPostBtn = document.getElementById('cancelPostBtn');
+        const newTopicBtn = document.getElementById('newTopicBtn');
+        const newTopicBtnContainer = document.getElementById('newTopicBtnContainer');
+        const flightModal = document.getElementById('flightModal');
+        const closeFlightModal = document.getElementById('closeFlightModal');
+        const successNotification = document.getElementById('successNotification');
+        const loadMoreNews = document.getElementById('loadMoreNews');
+        const loadMorePosts = document.getElementById('loadMorePosts');
+        const newsUpdateTime = document.getElementById('newsUpdateTime');
+        const communityPosts = document.getElementById('communityPosts');
+    
+        // Set current time for news update
+        function updateNewsTime() {
+            const now = new Date();
+            newsUpdateTime.textContent = now.toLocaleTimeString();
+        }
+        updateNewsTime();
+        setInterval(updateNewsTime, 3600000); // Update every hour
+    
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener('click', () => {
+  mobileMenu.classList.toggle('hidden');
+  document.body.style.overflow = mobileMenu.classList.contains('hidden') ? 'auto' : 'hidden';
+});
+    
+        // User dropdown toggle
+        userBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('hidden');
+        });
+    
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            dropdownMenu.classList.add('hidden');
+        });
+    
+        // Modal functions
+        function openLoginModal() {
+            loginModal.classList.remove('hidden');
+            registerModal.classList.add('hidden');
+        }
+    
+        function openRegisterModal() {
+            registerModal.classList.remove('hidden');
+            loginModal.classList.add('hidden');
+        }
+    
+        function closeModals() {
+            loginModal.classList.add('hidden');
+            registerModal.classList.add('hidden');
+            flightModal.classList.add('hidden');
+        }
+    
+        // Button event listeners
+        loginBtn.addEventListener('click', openLoginModal);
+        registerBtn.addEventListener('click', openRegisterModal);
+        closeLoginModal.addEventListener('click', closeModals);
+        closeRegisterModal.addEventListener('click', closeModals);
+        switchToRegister.addEventListener('click', openRegisterModal);
+        switchToLogin.addEventListener('click', openLoginModal);
+        loginPromptBtn.addEventListener('click', openLoginModal);
+    
+        // Show success notification
+        function showSuccessNotification(message) {
+            document.getElementById('successMessage').textContent = message;
+            successNotification.classList.remove('hidden');
+            setTimeout(() => {
+                successNotification.classList.add('hidden');
+            }, 3000);
+        }
+    
+        // Show error notification
+        function showErrorNotification(message) {
+            // You could add an error notification div similar to successNotification
+            alert(message); // Simple alert for now
+        }
+    
+        // Update UI based on auth state
+        function updateUI(user) {
+            if (user) {
+                // User is signed in
+                loginBtn.classList.add('hidden');
+                registerBtn.classList.add('hidden');
+                userMenu.classList.remove('hidden');
+                loginPrompt.classList.add('hidden');
+                createPostForm.classList.remove('hidden');
+                newTopicBtnContainer.classList.remove('hidden');
+                
+                // Update user info
+                const userAvatar = userMenu.querySelector('img');
+                const userName = userMenu.querySelector('span');
+                
+                userAvatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName || user.email)}&background=3B82F6&color=fff`;
+                userName.textContent = user.displayName || user.email;
+            } else {
+                // User is signed out
+                loginBtn.classList.remove('hidden');
+                registerBtn.classList.remove('hidden');
+                userMenu.classList.add('hidden');
+                loginPrompt.classList.remove('hidden');
+                createPostForm.classList.add('hidden');
+                newTopicBtnContainer.classList.add('hidden');
+            }
+        }
+    
+        // Login form submission
+// Login form submission
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    try {
+        await firebase.auth().signInWithEmailAndPassword(email, password);
+        closeModals();
+        showSuccessNotification('Login successful! Ooh ooh ah ah!');
+    } catch (error) {
+        showErrorNotification(error.message);
+        console.error("Monkey messed up:", error);
+    }
+});
+
+// Register form submission
+registerForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('registerName').value;
+    const email = document.getElementById('registerEmail').value;
+    const password = document.getElementById('registerPassword').value;
+    const confirmPassword = document.getElementById('registerConfirmPassword').value;
+    
+    if (password !== confirmPassword) {
+        showErrorNotification("Passwords don't match! 🐒💢");
+        return;
+    }
+    
+    try {
+        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        await userCredential.user.updateProfile({ displayName: name });
+        closeModals();
+        showSuccessNotification('Welcome to banana club! 🍌');
+    } catch (error) {
+        showErrorNotification(error.message);
+        console.error("Monkey registration fail:", error);
+    }
+});
+    
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+    firebase.auth().signOut().then(() => {
+        showSuccessNotification('Bye bye monkey! 🐒👋');
+    }).catch((error) => {
+        showErrorNotification(error.message);
+    });
+});
+    
+        // Create new post
+        newTopicBtn.addEventListener('click', () => {
+            createPostForm.classList.remove('hidden');
+            window.scrollTo({
+                top: createPostForm.offsetTop - 100,
+                behavior: 'smooth'
+            });
+        });
+    
+        // Cancel post
+        cancelPostBtn.addEventListener('click', () => {
+            document.getElementById('postTitle').value = '';
+            document.getElementById('postContent').value = '';
+            createPostForm.classList.add('hidden');
+        });
+    
+        // Submit post
+// Submit post
+        // Replace your current postForm event listener with this:
+postForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // Get form values
+    const title = document.getElementById('postTitle').value.trim();
+    const content = document.getElementById('postContent').value.trim();
+    const user = firebase.auth().currentUser;  // Changed from auth.currentUser
+
+    // Validation
+    if (!title || !content) {
+        alert("Please fill in both title and content");
+        return;
+    }
+
+    if (!user) {
+        alert("Please sign in to post");
+        return;
+    }
+
+    try {
+        // Add post to Firestore
+        await firebase.firestore().collection('posts').add({
+            title: title,
+            content: content,
+            authorId: user.uid,
+            authorName: user.displayName || user.email,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            likes: 0,
+            comments: 0
+        });
+
+        // Clear form and hide it
+        document.getElementById('postTitle').value = '';
+        document.getElementById('postContent').value = '';
+        createPostForm.classList.add('hidden');
+        
+        // Refresh posts and show success
+        loadPosts();
+        showSuccessNotification('Post published successfully!');
+        
+    } catch (error) {
+        console.error("Post error:", error);
+        alert("Error posting: " + error.message);
+    }
+});
+    
+        // Load posts from Firestore
+        // Load posts from Firestore
+        async function loadPosts() {
+    try {
+        const querySnapshot = await db.collection('posts')
+            .orderBy('createdAt', 'desc')
+            .limit(10)
+            .get();
+            
+        communityPosts.innerHTML = '';
+        
+        querySnapshot.forEach((doc) => {
+            const post = doc.data();
+            const postElement = document.createElement('div');
+            postElement.className = 'community-post bg-white rounded-lg p-4 mb-4 shadow-sm';
+            postElement.innerHTML = `
+                <div class="flex items-start mb-3">
+                    <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(post.authorName)}&background=3B82F6&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <div class="flex items-center">
+                            <h4 class="font-bold">${post.authorName}</h4>
+                            <span class="text-gray-500 text-sm ml-2">${formatDate(post.createdAt?.toDate())}</span>
+                        </div>
+                        <p class="text-gray-600 text-sm">${post.authorRole}</p>
+                    </div>
+                </div>
+                <h5 class="font-bold mb-2">${post.title}</h5>
+                <p class="text-gray-700 mb-3">${post.content}</p>
+                <div class="flex items-center text-sm text-gray-500">
+                    <button class="flex items-center mr-4 hover:text-aviation-blue">
+                        <i class="far fa-comment mr-1"></i> ${post.comments} comments
+                    </button>
+                    <button class="flex items-center hover:text-aviation-blue">
+                        <i class="far fa-heart mr-1"></i> ${post.likes} likes
+                    </button>
+                </div>
+            `;
+            
+            communityPosts.appendChild(postElement);
+        });
+    } catch (error) {
+        console.error("Error loading posts: ", error);
+        showErrorNotification("Error loading posts");
+    }
+}
+    
+        // Format date for display
+        function formatDate(date) {
+            if (!date) return 'Just now';
+            
+            const now = new Date();
+            const diffInSeconds = Math.floor((now - date) / 1000);
+            
+            if (diffInSeconds < 60) return 'Just now';
+            if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+            if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+            return `${Math.floor(diffInSeconds / 86400)} days ago`;
+        }
+    
+        // Flight tracking functionality
+        document.querySelectorAll('a[href="#tracker"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: document.getElementById('tracker').offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    
+        // Track flight buttons
+        document.querySelectorAll('a[href*="#track"]').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Set flight details in modal
+                const flightElement = e.target.closest('.bg-gray-100');
+                const flightNumber = flightElement.querySelector('.font-bold').textContent;
+                const route = flightElement.querySelector('.text-sm').textContent;
+                const [departure, arrival] = route.split(' ➔ ');
+                
+                document.getElementById('flightNumber').textContent = flightNumber;
+                document.getElementById('departureAirport').textContent = departure;
+                document.getElementById('arrivalAirport').textContent = arrival;
+                
+                // Open modal
+                flightModal.classList.remove('hidden');
+            });
+        });
+    
+        // Search flight
+        document.getElementById('searchFlightBtn').addEventListener('click', () => {
+            const query = document.getElementById('flightSearch').value;
+            if (query) {
+                // In a real app, this would search for flights
+                // For demo, we'll just open the modal with dummy data
+                document.getElementById('flightNumber').textContent = query;
+                document.getElementById('departureAirport').textContent = 'LHR';
+                document.getElementById('arrivalAirport').textContent = 'JFK';
+                document.getElementById('flightStatus').textContent = 'On Time';
+                document.getElementById('departureTime').textContent = '10:45';
+                document.getElementById('aircraftType').textContent = 'Boeing 777-300ER';
+                document.getElementById('aircraftReg').textContent = 'G-STBA';
+                
+                flightModal.classList.remove('hidden');
+            }
+        });
+    
+        // Load more news
+        loadMoreNews.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSuccessNotification('Loading more aviation news...');
+        });
+    
+        // Load more posts
+        loadMorePosts.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSuccessNotification('Loading more community posts...');
+            // In a real implementation, you would query the next set of posts
+        });
+    
+        // Initialize flight map (simulated)
+        function initFlightMap() {
+            console.log('Flight map initialized');
+        }
+    
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+    initFlightMap();
+    loadFlightRadarMap();
+    
+    // Set up auth state listener
+    auth.onAuthStateChanged((user) => {
+        updateUI(user);
+        if (user) {
+            loadPosts(); // Only load posts if monkey is logged in
+            console.log("Logged in!", user.email);
+        } else {
+            console.log("Logged out.");
+        }
+    });
+});
+    
+        // Flightradar24 map integration (placeholder)
+        function loadFlightRadarMap() {
+            const mapContainer = document.getElementById('map');
+            mapContainer.innerHTML = `
+                <div class="flex items-center justify-center h-full bg-gray-200 rounded-lg">
+                    <div class="text-center p-6">
+                        <i class="fas fa-plane text-4xl text-aviation-blue mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Live Flight Tracker</h3>
+                        <p class="mb-4">Powered by Flightradar24</p>
+                        <a href="https://www.flightradar24.com" target="_blank" class="inline-block px-4 py-2 bg-aviation-blue text-white rounded-md hover:bg-aviation-dark">
+                            View Full Map
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+
+
+
+<!-- DELETE OLD FIREBASE SCRIPTS -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+
+
+
+
+<script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAZxhme1w-z6Ba7LeONxtmZBIPOulJoXlo",
+      authDomain: "nextgen-aviation-hub.firebaseapp.com",
+      projectId: "nextgen-aviation-hub",
+      storageBucket: "nextgen-aviation-hub.appspot.com",
+      messagingSenderId: "825651026113",
+      appId: "1:825651026113:web:e08f110011dee2cd121c40",
+      measurementId: "G-7EHKJ9114Z"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore(); // <-- ADD THIS LINE!
+  </script>
+
+</body>
+</html>
